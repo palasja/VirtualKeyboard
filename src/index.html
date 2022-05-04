@@ -5,8 +5,192 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        textarea {
+            width: 850px;
+            display: block;
+            margin: 50px auto 0 auto;
+            height: 140px;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 850px;
+            background-color: #DDDDDD;
+            margin: 50px auto 0 auto;
+            grid-gap: 10px;
+        }
+
+        .btn {
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: rebeccapurple;
+            transform: .5s;
+        }
+
+        .press {
+            border: none;
+            border-radius: 30px;
+        }
+    </style>
 </head>
 <body>
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => { 
+            let btnValues = new Map();
+        btnValues.set("Backquote", { 'val': '`', 'shiftVal': '~', 'belVal': 'ё', 'belShiftVal': 'Ё' });
+        btnValues.set("Digit1", { "val": '1', "shiftVal": '!', 'belVal': '1', 'belShiftVal': '!' });
+        btnValues.set("Digit2", { "val": '2', "shiftVal": '@', 'belVal': '2', 'belShiftVal': '"' });
+        btnValues.set("Digit3", { "val": '3', "shiftVal": '#', 'belVal': '3', 'belShiftVal': '№' });
+        btnValues.set("Digit4", { "val": '4', "shiftVal": '$', 'belVal': '4', 'belShiftVal': ';' });
+        btnValues.set("Digit5", { "val": '5', "shiftVal": '%', 'belVal': '5', 'belShiftVal': '%' });
+        btnValues.set("Digit6", { "val": '6', "shiftVal": '^', 'belVal': '6', 'belShiftVal': ':' });
+        btnValues.set("Digit7", { "val": '7', "shiftVal": '&', 'belVal': '7', 'belShiftVal': '?' });
+        btnValues.set("Digit8", { "val": '8', "shiftVal": '*', 'belVal': '8', 'belShiftVal': '*' });
+        btnValues.set("Digit9", { "val": '9', "shiftVal": '(', 'belVal': '9', 'belShiftVal': '(' });
+        btnValues.set("Digit0", { "val": '0', "shiftVal": ')', 'belVal': '0', 'belShiftVal': ')' });
+        btnValues.set("Minus", { "val": '-', "shiftVal": '_', 'belVal': '-', 'belShiftVal': '_' });
+        btnValues.set("Equal", { "val": '=', "shiftVal": '+', 'belVal': '=', 'belShiftVal': '+' });
+        btnValues.set("Backspace", {'name': 'Backspace'});
+        btnValues.set("Tab", { 'name': 'Tab', 'val': 'Tab', 'shiftVal': '\t', 'belVal': '\t', 'belShiftVal': '\t' });
+        btnValues.set("KeyQ", { "val": 'q', "shiftVal": 'Q', 'belVal': 'й', 'belShiftVal': 'Й' });
+        btnValues.set("KeyW", { "val": 'w', "shiftVal": 'W', 'belVal': 'ц', 'belShiftVal': 'Ц' });
+        btnValues.set("KeyE", { "val": 'e', "shiftVal": 'E', 'belVal': 'у', 'belShiftVal': 'К' });
+        btnValues.set("KeyR", { "val": 'r', "shiftVal": 'R', 'belVal': 'к', 'belShiftVal': 'У' });
+        btnValues.set("KeyT", { "val": 't', "shiftVal": 'T', 'belVal': 'е', 'belShiftVal': 'Е' });
+        btnValues.set("KeyY", { "val": 'y', "shiftVal": 'Y', 'belVal': 'н', 'belShiftVal': 'Н' });
+        btnValues.set("KeyU", { "val": 'u', "shiftVal": 'U', 'belVal': 'г', 'belShiftVal': 'Г' });
+        btnValues.set("KeyI", { "val": 'i', "shiftVal": 'I', 'belVal': 'ш', 'belShiftVal': 'Ш' });
+        btnValues.set("KeyO", { "val": 'o', "shiftVal": 'O', 'belVal': 'ў', 'belShiftVal': 'Ў' });
+        btnValues.set("KeyP", { "val": 'p', "shiftVal": 'P', 'belVal': 'з', 'belShiftVal': 'З' });
+        btnValues.set("BracketLeft", { "val": '[', "shiftVal": '{', 'belVal': 'х', 'belShiftVal': 'ъ' });
+    btnValues.set("BracketRight", { "val": ']', "shiftVal": '}', 'belVal': 'ъ', 'belShiftVal': 'Ъ' });
+    btnValues.set("Delete", { 'name': 'Delete' });
+    btnValues.set("CapsLock", { 'name': 'Caps' });
+        btnValues.set("KeyA", { "val": 'a', "shiftVal": 'A', 'belVal': 'ф', 'belShiftVal': 'Ф' });
+        btnValues.set("KeyS", { "val": 's', "shiftVal": 'S', 'belVal': 'ы', 'belShiftVal': 'Ы' });
+        btnValues.set("KeyD", { "val": 'd', "shiftVal": 'D', 'belVal': 'в', 'belShiftVal': 'В' });
+        btnValues.set("KeyF", { "val": 'f', "shiftVal": 'F', 'belVal': 'а', 'belShiftVal': 'А' });
+        btnValues.set("KeyG", { "val": 'g', "shiftVal": 'G', 'belVal': 'п', 'belShiftVal': 'П' });
+        btnValues.set("KeyH", { "val": 'h', "shiftVal": 'H', 'belVal': 'р', 'belShiftVal': 'Р' });
+        btnValues.set("KeyJ", { "val": 'j', "shiftVal": 'J', 'belVal': 'о', 'belShiftVal': 'О' });
+        btnValues.set("KeyK", { "val": 'k', "shiftVal": 'K', 'belVal': 'л', 'belShiftVal': 'Л' });
+        btnValues.set("KeyL", { "val": 'l', "shiftVal": 'L', 'belVal': 'д', 'belShiftVal': 'Д' });
+        btnValues.set("Semicolon", { "val": ';', "shiftVal": ':', 'belVal': 'ж', 'belShiftVal': 'Ж' });
+    btnValues.set("Quote", { "val": "'", "shiftVal": ':', 'belVal': 'э', 'belShiftVal': 'Э' });
+    btnValues.set("Backslash", { "val": '\\', "shiftVal": ':', 'belVal': '\\', 'belShiftVal': '/' });
+    btnValues.set("Enter", { 'name': 'Enter', 'val': '\n', 'shiftVal': '\n', 'belVal': '\n', 'belShiftVal': '\n' });
+    btnValues.set("ShiftLeft", { 'name': 'Shift' });
+        btnValues.set("KeyZ", { "val": 'z', "shiftVal": 'Z', 'belVal': 'я', 'belShiftVal': 'Я' });
+        btnValues.set("KeyX", { "val": 'x', "shiftVal": 'X', 'belVal': 'ч', 'belShiftVal': 'Ч' });
+        btnValues.set("KeyC", { "val": 'c', "shiftVal": 'C', 'belVal': 'с', 'belShiftVal': 'С' });
+        btnValues.set("KeyV", { "val": 'v', "shiftVal": 'V', 'belVal': 'м', 'belShiftVal': 'М' });
+        btnValues.set("KeyB", { "val": 'b', "shiftVal": 'B', 'belVal': 'і', 'belShiftVal': 'І' });
+        btnValues.set("KeyN", { "val": 'n', "shiftVal": 'N', 'belVal': 'т', 'belShiftVal': 'Т' });
+        btnValues.set("KeyM", { "val": 'm', "shiftVal": 'M', 'belVal': 'ь', 'belShiftVal': 'Ь' });
+        btnValues.set("Comma", { "val": ',', "shiftVal": '<', 'belVal': 'б', 'belShiftVal': 'Б' });
+        btnValues.set("Period", { "val": '.', "shiftVal": '>', 'belVal': 'ю', 'belShiftVal': 'Ю' });
+        btnValues.set("Slash", { "val": '/', "shiftVal": '?', 'belVal': '.', 'belShiftVal': ',' });
+        btnValues.set("ArrowUp", { "val": '&#129145', "shiftVal": '&#129145', 'belVal': '&#129145', 'belShiftVal': '&#129145' });
+    btnValues.set("ShiftRight", { "name": 'Shift'});
+    btnValues.set("ControlLeft", { "name": 'Ctrl'});
+    btnValues.set("MetaLeft", { "name": 'Win'});
+    btnValues.set("AltLeft", { "name": 'Alt'});
+    btnValues.set("Space", { "val": ' ', "shiftVal": ' ', 'belVal': ' ', 'belShiftVal': ' ' });
+    btnValues.set("AltRight", { "name": 'Alt', "func": changeLang });
+    btnValues.set("ArrowLeft", { "val": '&#129144', "shiftVal": '&#129144', 'belVal': '&#129144', 'belShiftVal': '&#129144' });
+    btnValues.set("ArrowDown", { "val": '&#129147', "shiftVal": '&#129147', 'belVal': '&#129147', 'belShiftVal': '&#129147' });
+    btnValues.set("ArrowRight", { "val": '&#129146', "shiftVal": '&#129146', 'belVal': '&#129146', 'belShiftVal': '&#129146' });
+    btnValues.set("ControlRight", { "name": 'Ctrl', "func": changeLang});
+
     
+        
+    let eng = true;
+    let shift = true;
+    let keyboard = document.createElement('div');
+    keyboard.id = 'keyboard';
+    keyboard.classList.add('keyboard');
+    [...btnValues.keys()].forEach(code => keyboard.append(getBtn(code)));
+    let textArea = document.createElement('textarea');
+    textArea.id = 'textarea';
+    document.addEventListener('keydown', keyboardPress);
+    document.addEventListener('keyup', keyboardUp);
+
+    document.addEventListener('keydown', keyboardPress);
+    document.addEventListener('keyup', keyboardUp);
+
+    document.addEventListener('keydown', shiftDown);
+    document.addEventListener('keyup', shiftUp);
+
+    //document.addEventListener('keydown', changeLang);
+    document.querySelector('body').append(textArea);
+    document.querySelector('body').append(keyboard);
+    function getBtn(code) {
+        let btn = document.createElement('div');
+        let btnProp = btnValues.get(code);
+        btn.setAttribute('data-code', code);
+        btn.classList.add('btn');
+
+        if (btnProp.name === undefined) {
+            btn.innerHTML = btnProp.val;
+            btn.addEventListener('mousedown', (ev) => { 
+                ev.target.classList.toggle('press'); 
+                document.getElementById('textarea').innerHTML += ev.target.innerHTML;
+             });
+            btn.addEventListener('mouseup', (ev) => { ev.target.classList.toggle('press') });
+        } else {
+            btn.innerHTML = btnProp.name;
+            console.log(typeof btnProp.func);
+            btn.addEventListener('mousedown', (ev) => btnProp.func(ev));
+            btn.addEventListener('mouseup', (ev) => ev.target.classList.toggle('press'));
+        }
+        
+        return btn;
+    }
+    function keyboardPress(ev) {
+        ev.preventDefault();
+        const btn = document.querySelector(`[data-code=${ev.code}]`);
+        if (btn != undefined) {
+            btn.classList.add('press');
+            if (btnValues.get(ev.code).name === undefined) document.getElementById('textarea').innerHTML += btn.innerHTML;
+        }
+        
+    }
+    function keyboardUp(ev) {
+        const btn = document.querySelector(`[data-code=${ev.code}]`);
+        if (btn != undefined) btn.classList.remove('press');
+    }
+    function shiftDown(ev) {
+        if (ev.shiftKey) {
+            eng ?
+                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).shiftVal }) : 
+                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).belShiftVal });
+        }
+        shift = true;
+    }
+    function shiftUp(ev) {
+        if (shift) eng ?
+            [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).val }) :
+            [...document.querySelectorAll('.btn')].forEach(btn =>{ if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).belVal });
+        shift = false;
+    }
+    function changeLang(ev) {
+        if (ev.ctrlKey && ev.altKey) {
+            eng = !eng;
+            eng ?
+                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).val }) :
+                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).belVal });
+        }
+    }
+        });
+        
+    </script>
 </body>
 </html>
