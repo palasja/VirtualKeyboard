@@ -1,0 +1,27 @@
+{
+  "name": "virtual-keyboard",
+  "version": "1.0.0",
+  "description": "RSS Virtual Keyboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/palasja/VirtualKeyboard.git"
+  },
+  "keywords": [
+    "js",
+    "keyboard"
+  ],
+  "author": "palasja@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/palasja/VirtualKeyboard/issues"
+  },
+  "homepage": "https://github.com/palasja/VirtualKeyboard#readme",
+  "devDependencies": {
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
