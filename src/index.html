@@ -33,6 +33,7 @@
             height: 50px;
             background-color: #F42A23;
             transform: .5s;
+            user-select: none;
         }
         .btn:hover{
             cursor: pointer;
@@ -48,10 +49,9 @@
 <body>
     <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => { 
-        let eng = true;
-    let shift = true;
+    let eng = true;
     let caps = false;
-            let btnValues = new Map();
+        let btnValues = new Map();
         btnValues.set("Backquote", { 'val': '`', 'shiftVal': '~', 'belVal': 'ё', 'belShiftVal': 'Ё' });
         btnValues.set("Digit1", { "val": '1', "shiftVal": '!', 'belVal': '1', 'belShiftVal': '!' });
         btnValues.set("Digit2", { "val": '2', "shiftVal": '@', 'belVal': '2', 'belShiftVal': '"' });
@@ -111,14 +111,11 @@
     btnValues.set("MetaLeft", { "name": 'Win'});
     btnValues.set("AltLeft", { "name": 'Alt'});
     btnValues.set("Space", { "val": ' ', "shiftVal": ' ', 'belVal': ' ', 'belShiftVal': ' ' });
-    btnValues.set("AltRight", { "name": 'Alt', "func": changeLang });
+    btnValues.set("AltRight", { "name": 'Alt'});
     btnValues.set("ArrowLeft", { "val": '◄', "shiftVal": '◄', 'belVal': '◄', 'belShiftVal': '◄' });
     btnValues.set("ArrowDown", { "val": '▼', "shiftVal": '▼', 'belVal': '▼', 'belShiftVal': '▼' });
     btnValues.set("ArrowRight", { "val": '►', "shiftVal": '►', 'belVal': '►', 'belShiftVal': '►' });
-    btnValues.set("ControlRight", { "name": 'Ctrl', "func": changeLang});
-
-    
-        
+    btnValues.set("ControlRight", { "name": 'Ctrl'});
 
     let keyboard = document.createElement('div');
     keyboard.id = 'keyboard';
@@ -129,9 +126,6 @@
     document.addEventListener('keydown', keyboardPress);
     document.addEventListener('keyup', keyboardUp);
 
-    // document.addEventListener('keydown', keyboardPress);
-    // document.addEventListener('keyup', keyboardUp);
-
     document.addEventListener('keydown', shiftDown);
     document.addEventListener('keyup', shiftUp);
 
@@ -141,26 +135,30 @@
     document.addEventListener('keydown', tabDown);
     document.addEventListener('keydown', backspace);
     document.addEventListener('keydown', del);
+    document.addEventListener('mousedown', (ev) => { 
+        if(ev.target.dataset.code !== undefined){
+            ev.target.classList.toggle('press'); 
+            printChar(ev.target.innerHTML);
+        }
+    });
+    document.addEventListener('mouseup', (ev) => { 
+        if(ev.target.dataset.code !== undefined){
+            ev.target.classList.toggle('press'); 
+        }
+    });
     document.querySelector('body').append(textArea);
     document.querySelector('body').append(keyboard);
     function getBtn(code) {
-        let btn = document.createElement('div');
+        let btn = document.createElement('button');
         let btnProp = btnValues.get(code);
         btn.setAttribute('data-code', code);
         btn.classList.add('btn');
 
         if (btnProp.name === undefined) {
             btn.innerHTML = btnProp.val;
-            btn.addEventListener('mousedown', (ev) => { 
-                ev.target.classList.toggle('press'); 
-                document.getElementById('textarea').value += ev.target.innerHTML;
-             });
-            btn.addEventListener('mouseup', (ev) => { ev.target.classList.toggle('press') });
         } else {
             btn.innerHTML = btnProp.name;
             console.log(typeof btnProp.func);
-            btn.addEventListener('mousedown', (ev) => btnProp.func(ev));
-            btn.addEventListener('mouseup', (ev) => ev.target.classList.toggle('press'));
         }
         
         return btn;
@@ -170,7 +168,7 @@
         const btn = document.querySelector(`[data-code=${ev.code}]`);
         if (btn != undefined && ev.code !== 'CapsLock') {
             btn.classList.add('press');
-            if (btnValues.get(ev.code).name === undefined) document.getElementById('textarea').value += btn.innerHTML;
+            if (btnValues.get(ev.code).name === undefined) printChar(btn.innerHTML);
         }
     }
     function keyboardUp(ev) {
@@ -200,12 +198,12 @@
     } 
     function enterDown(ev) {
         if (ev.code === 'Enter') {
-            document.getElementById('textarea').value += '\n';
+            printChar('\n');
         }
     } 
     function tabDown(ev) {
         if (ev.code === 'Tab') {
-            document.getElementById('textarea').value += '\t';
+            printChar('\t');
         }
     } 
     function backspace(ev){
@@ -227,6 +225,13 @@
             ta.selectionStart = ts;
             ta.selectionEnd = ts;
         }
+    }
+    function printChar(char){
+        const ta = document.querySelector('textarea');
+        const ts = ta.selectionStart;
+        ta.value = `${ta.value.slice(0, ta.selectionStart)}${char}${ta.value.slice(ta.selectionStart)}`;
+        ta.selectionStart = ts+1;
+        ta.selectionEnd = ts+1;
     }
     function siftCaps(isShift){
         if(isShift == false && caps == false ){
