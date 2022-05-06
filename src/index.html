@@ -31,8 +31,12 @@
             align-items: center;
             width: 50px;
             height: 50px;
-            background-color: rebeccapurple;
+            background-color: #F42A23;
             transform: .5s;
+        }
+        .btn:hover{
+            cursor: pointer;
+            background-color: #f42a236a;
         }
 
         .press {
@@ -44,6 +48,9 @@
 <body>
     <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => { 
+        let eng = true;
+    let shift = true;
+    let caps = false;
             let btnValues = new Map();
         btnValues.set("Backquote", { 'val': '`', 'shiftVal': '~', 'belVal': 'ё', 'belShiftVal': 'Ё' });
         btnValues.set("Digit1", { "val": '1', "shiftVal": '!', 'belVal': '1', 'belShiftVal': '!' });
@@ -59,61 +66,60 @@
         btnValues.set("Minus", { "val": '-', "shiftVal": '_', 'belVal': '-', 'belShiftVal': '_' });
         btnValues.set("Equal", { "val": '=', "shiftVal": '+', 'belVal': '=', 'belShiftVal': '+' });
         btnValues.set("Backspace", {'name': 'Backspace'});
-        btnValues.set("Tab", { 'name': 'Tab', 'val': 'Tab', 'shiftVal': '\t', 'belVal': '\t', 'belShiftVal': '\t' });
-        btnValues.set("KeyQ", { "val": 'q', "shiftVal": 'Q', 'belVal': 'й', 'belShiftVal': 'Й' });
-        btnValues.set("KeyW", { "val": 'w', "shiftVal": 'W', 'belVal': 'ц', 'belShiftVal': 'Ц' });
-        btnValues.set("KeyE", { "val": 'e', "shiftVal": 'E', 'belVal': 'у', 'belShiftVal': 'К' });
-        btnValues.set("KeyR", { "val": 'r', "shiftVal": 'R', 'belVal': 'к', 'belShiftVal': 'У' });
-        btnValues.set("KeyT", { "val": 't', "shiftVal": 'T', 'belVal': 'е', 'belShiftVal': 'Е' });
-        btnValues.set("KeyY", { "val": 'y', "shiftVal": 'Y', 'belVal': 'н', 'belShiftVal': 'Н' });
-        btnValues.set("KeyU", { "val": 'u', "shiftVal": 'U', 'belVal': 'г', 'belShiftVal': 'Г' });
-        btnValues.set("KeyI", { "val": 'i', "shiftVal": 'I', 'belVal': 'ш', 'belShiftVal': 'Ш' });
-        btnValues.set("KeyO", { "val": 'o', "shiftVal": 'O', 'belVal': 'ў', 'belShiftVal': 'Ў' });
-        btnValues.set("KeyP", { "val": 'p', "shiftVal": 'P', 'belVal': 'з', 'belShiftVal': 'З' });
-        btnValues.set("BracketLeft", { "val": '[', "shiftVal": '{', 'belVal': 'х', 'belShiftVal': 'ъ' });
-    btnValues.set("BracketRight", { "val": ']', "shiftVal": '}', 'belVal': 'ъ', 'belShiftVal': 'Ъ' });
+        btnValues.set("Tab", { 'name': 'Tab', 'val': 'Tab' });
+        btnValues.set("KeyQ", { "val": 'q', "shiftVal": 'Q', 'belVal': 'й', 'belShiftVal': 'Й', 'isLetter': true, 'isBelLetter': true});
+        btnValues.set("KeyW", { "val": 'w', "shiftVal": 'W', 'belVal': 'ц', 'belShiftVal': 'Ц', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyE", { "val": 'e', "shiftVal": 'E', 'belVal': 'у', 'belShiftVal': 'К', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyR", { "val": 'r', "shiftVal": 'R', 'belVal': 'к', 'belShiftVal': 'У', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyT", { "val": 't', "shiftVal": 'T', 'belVal': 'е', 'belShiftVal': 'Е', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyY", { "val": 'y', "shiftVal": 'Y', 'belVal': 'н', 'belShiftVal': 'Н', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyU", { "val": 'u', "shiftVal": 'U', 'belVal': 'г', 'belShiftVal': 'Г', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyI", { "val": 'i', "shiftVal": 'I', 'belVal': 'ш', 'belShiftVal': 'Ш', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyO", { "val": 'o', "shiftVal": 'O', 'belVal': 'ў', 'belShiftVal': 'Ў', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyP", { "val": 'p', "shiftVal": 'P', 'belVal': 'з', 'belShiftVal': 'З', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("BracketLeft", { "val": '[', "shiftVal": '{', 'belVal': 'х', 'belShiftVal': 'ъ', 'isBelLetter': true });
+    btnValues.set("BracketRight", { "val": ']', "shiftVal": '}', 'belVal': 'ъ', 'belShiftVal': 'Ъ', 'isBelLetter': true });
     btnValues.set("Delete", { 'name': 'Delete' });
     btnValues.set("CapsLock", { 'name': 'Caps' });
-        btnValues.set("KeyA", { "val": 'a', "shiftVal": 'A', 'belVal': 'ф', 'belShiftVal': 'Ф' });
-        btnValues.set("KeyS", { "val": 's', "shiftVal": 'S', 'belVal': 'ы', 'belShiftVal': 'Ы' });
-        btnValues.set("KeyD", { "val": 'd', "shiftVal": 'D', 'belVal': 'в', 'belShiftVal': 'В' });
-        btnValues.set("KeyF", { "val": 'f', "shiftVal": 'F', 'belVal': 'а', 'belShiftVal': 'А' });
-        btnValues.set("KeyG", { "val": 'g', "shiftVal": 'G', 'belVal': 'п', 'belShiftVal': 'П' });
-        btnValues.set("KeyH", { "val": 'h', "shiftVal": 'H', 'belVal': 'р', 'belShiftVal': 'Р' });
-        btnValues.set("KeyJ", { "val": 'j', "shiftVal": 'J', 'belVal': 'о', 'belShiftVal': 'О' });
-        btnValues.set("KeyK", { "val": 'k', "shiftVal": 'K', 'belVal': 'л', 'belShiftVal': 'Л' });
-        btnValues.set("KeyL", { "val": 'l', "shiftVal": 'L', 'belVal': 'д', 'belShiftVal': 'Д' });
-        btnValues.set("Semicolon", { "val": ';', "shiftVal": ':', 'belVal': 'ж', 'belShiftVal': 'Ж' });
-    btnValues.set("Quote", { "val": "'", "shiftVal": ':', 'belVal': 'э', 'belShiftVal': 'Э' });
+        btnValues.set("KeyA", { "val": 'a', "shiftVal": 'A', 'belVal': 'ф', 'belShiftVal': 'Ф', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyS", { "val": 's', "shiftVal": 'S', 'belVal': 'ы', 'belShiftVal': 'Ы', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyD", { "val": 'd', "shiftVal": 'D', 'belVal': 'в', 'belShiftVal': 'В', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyF", { "val": 'f', "shiftVal": 'F', 'belVal': 'а', 'belShiftVal': 'А', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyG", { "val": 'g', "shiftVal": 'G', 'belVal': 'п', 'belShiftVal': 'П', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyH", { "val": 'h', "shiftVal": 'H', 'belVal': 'р', 'belShiftVal': 'Р', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyJ", { "val": 'j', "shiftVal": 'J', 'belVal': 'о', 'belShiftVal': 'О', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyK", { "val": 'k', "shiftVal": 'K', 'belVal': 'л', 'belShiftVal': 'Л', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyL", { "val": 'l', "shiftVal": 'L', 'belVal': 'д', 'belShiftVal': 'Д', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("Semicolon", { "val": ';', "shiftVal": ':', 'belVal': 'ж', 'belShiftVal': 'Ж', 'isBelLetter': true });
+    btnValues.set("Quote", { "val": "'", "shiftVal": ':', 'belVal': 'э', 'belShiftVal': 'Э', 'isBelLetter': true });
     btnValues.set("Backslash", { "val": '\\', "shiftVal": ':', 'belVal': '\\', 'belShiftVal': '/' });
-    btnValues.set("Enter", { 'name': 'Enter', 'val': '\n', 'shiftVal': '\n', 'belVal': '\n', 'belShiftVal': '\n' });
+    btnValues.set("Enter", { 'name': 'Enter', 'val': '\n' });
     btnValues.set("ShiftLeft", { 'name': 'Shift' });
-        btnValues.set("KeyZ", { "val": 'z', "shiftVal": 'Z', 'belVal': 'я', 'belShiftVal': 'Я' });
-        btnValues.set("KeyX", { "val": 'x', "shiftVal": 'X', 'belVal': 'ч', 'belShiftVal': 'Ч' });
-        btnValues.set("KeyC", { "val": 'c', "shiftVal": 'C', 'belVal': 'с', 'belShiftVal': 'С' });
-        btnValues.set("KeyV", { "val": 'v', "shiftVal": 'V', 'belVal': 'м', 'belShiftVal': 'М' });
-        btnValues.set("KeyB", { "val": 'b', "shiftVal": 'B', 'belVal': 'і', 'belShiftVal': 'І' });
-        btnValues.set("KeyN", { "val": 'n', "shiftVal": 'N', 'belVal': 'т', 'belShiftVal': 'Т' });
-        btnValues.set("KeyM", { "val": 'm', "shiftVal": 'M', 'belVal': 'ь', 'belShiftVal': 'Ь' });
-        btnValues.set("Comma", { "val": ',', "shiftVal": '<', 'belVal': 'б', 'belShiftVal': 'Б' });
-        btnValues.set("Period", { "val": '.', "shiftVal": '>', 'belVal': 'ю', 'belShiftVal': 'Ю' });
+        btnValues.set("KeyZ", { "val": 'z', "shiftVal": 'Z', 'belVal': 'я', 'belShiftVal': 'Я', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyX", { "val": 'x', "shiftVal": 'X', 'belVal': 'ч', 'belShiftVal': 'Ч', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyC", { "val": 'c', "shiftVal": 'C', 'belVal': 'с', 'belShiftVal': 'С', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyV", { "val": 'v', "shiftVal": 'V', 'belVal': 'м', 'belShiftVal': 'М', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyB", { "val": 'b', "shiftVal": 'B', 'belVal': 'і', 'belShiftVal': 'І', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyN", { "val": 'n', "shiftVal": 'N', 'belVal': 'т', 'belShiftVal': 'Т', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("KeyM", { "val": 'm', "shiftVal": 'M', 'belVal': 'ь', 'belShiftVal': 'Ь', 'isLetter': true, 'isBelLetter': true });
+        btnValues.set("Comma", { "val": ',', "shiftVal": '<', 'belVal': 'б', 'belShiftVal': 'Б', 'isBelLetter': true });
+        btnValues.set("Period", { "val": '.', "shiftVal": '>', 'belVal': 'ю', 'belShiftVal': 'Ю', 'isBelLetter': true });
         btnValues.set("Slash", { "val": '/', "shiftVal": '?', 'belVal': '.', 'belShiftVal': ',' });
-        btnValues.set("ArrowUp", { "val": '&#129145', "shiftVal": '&#129145', 'belVal': '&#129145', 'belShiftVal': '&#129145' });
+        btnValues.set("ArrowUp", { "val": '▲', "shiftVal": '▲', 'belVal': '▲', 'belShiftVal': '▲' });
     btnValues.set("ShiftRight", { "name": 'Shift'});
     btnValues.set("ControlLeft", { "name": 'Ctrl'});
     btnValues.set("MetaLeft", { "name": 'Win'});
     btnValues.set("AltLeft", { "name": 'Alt'});
     btnValues.set("Space", { "val": ' ', "shiftVal": ' ', 'belVal': ' ', 'belShiftVal': ' ' });
     btnValues.set("AltRight", { "name": 'Alt', "func": changeLang });
-    btnValues.set("ArrowLeft", { "val": '&#129144', "shiftVal": '&#129144', 'belVal': '&#129144', 'belShiftVal': '&#129144' });
-    btnValues.set("ArrowDown", { "val": '&#129147', "shiftVal": '&#129147', 'belVal': '&#129147', 'belShiftVal': '&#129147' });
-    btnValues.set("ArrowRight", { "val": '&#129146', "shiftVal": '&#129146', 'belVal': '&#129146', 'belShiftVal': '&#129146' });
+    btnValues.set("ArrowLeft", { "val": '◄', "shiftVal": '◄', 'belVal': '◄', 'belShiftVal': '◄' });
+    btnValues.set("ArrowDown", { "val": '▼', "shiftVal": '▼', 'belVal': '▼', 'belShiftVal': '▼' });
+    btnValues.set("ArrowRight", { "val": '►', "shiftVal": '►', 'belVal': '►', 'belShiftVal': '►' });
     btnValues.set("ControlRight", { "name": 'Ctrl', "func": changeLang});
 
     
         
-    let eng = true;
-    let shift = true;
+
     let keyboard = document.createElement('div');
     keyboard.id = 'keyboard';
     keyboard.classList.add('keyboard');
@@ -123,13 +129,18 @@
     document.addEventListener('keydown', keyboardPress);
     document.addEventListener('keyup', keyboardUp);
 
-    document.addEventListener('keydown', keyboardPress);
-    document.addEventListener('keyup', keyboardUp);
+    // document.addEventListener('keydown', keyboardPress);
+    // document.addEventListener('keyup', keyboardUp);
 
     document.addEventListener('keydown', shiftDown);
     document.addEventListener('keyup', shiftUp);
 
-    //document.addEventListener('keydown', changeLang);
+    document.addEventListener('keydown', capsDown);
+    document.addEventListener('keydown', changeLang);
+    document.addEventListener('keydown', enterDown);
+    document.addEventListener('keydown', tabDown);
+    document.addEventListener('keydown', backspace);
+    document.addEventListener('keydown', del);
     document.querySelector('body').append(textArea);
     document.querySelector('body').append(keyboard);
     function getBtn(code) {
@@ -142,7 +153,7 @@
             btn.innerHTML = btnProp.val;
             btn.addEventListener('mousedown', (ev) => { 
                 ev.target.classList.toggle('press'); 
-                document.getElementById('textarea').innerHTML += ev.target.innerHTML;
+                document.getElementById('textarea').value += ev.target.innerHTML;
              });
             btn.addEventListener('mouseup', (ev) => { ev.target.classList.toggle('press') });
         } else {
@@ -157,40 +168,119 @@
     function keyboardPress(ev) {
         ev.preventDefault();
         const btn = document.querySelector(`[data-code=${ev.code}]`);
-        if (btn != undefined) {
+        if (btn != undefined && ev.code !== 'CapsLock') {
             btn.classList.add('press');
-            if (btnValues.get(ev.code).name === undefined) document.getElementById('textarea').innerHTML += btn.innerHTML;
+            if (btnValues.get(ev.code).name === undefined) document.getElementById('textarea').value += btn.innerHTML;
         }
-        
     }
     function keyboardUp(ev) {
         const btn = document.querySelector(`[data-code=${ev.code}]`);
-        if (btn != undefined) btn.classList.remove('press');
+        if (btn != undefined && ev.code !== 'CapsLock') btn.classList.remove('press');
     }
     function shiftDown(ev) {
         if (ev.shiftKey) {
-            eng ?
-                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).shiftVal }) : 
-                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).belShiftVal });
+            siftCaps(true);
         }
-        shift = true;
     }
     function shiftUp(ev) {
-        if (shift) eng ?
-            [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).val }) :
-            [...document.querySelectorAll('.btn')].forEach(btn =>{ if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).belVal });
-        shift = false;
+        if (ev.code === 'ShiftRight' || ev.code === 'ShiftLeft') siftCaps(false);
     }
     function changeLang(ev) {
         if (ev.ctrlKey && ev.altKey) {
             eng = !eng;
-            eng ?
-                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).val }) :
-                [...document.querySelectorAll('.btn')].forEach(btn => { if (btnValues.get(btn.dataset.code).name === undefined) btn.innerHTML = btnValues.get(btn.dataset.code).belVal });
+            siftCaps(false);
         }
     }
-        });
+    function capsDown(ev) {
+        if (ev.code === 'CapsLock') {
+            caps = !caps;
+            caps ? document.querySelector(`[data-code=CapsLock]`).classList.add('press'): document.querySelector(`[data-code=CapsLock]`).classList.remove('press');
+            siftCaps(false);
+        }
+    } 
+    function enterDown(ev) {
+        if (ev.code === 'Enter') {
+            document.getElementById('textarea').value += '\n';
+        }
+    } 
+    function tabDown(ev) {
+        if (ev.code === 'Tab') {
+            document.getElementById('textarea').value += '\t';
+        }
+    } 
+    function backspace(ev){
+        if(ev.code === 'Backspace'){
+            let ta = document.querySelector('textarea');
+            if(ta.selectionStart == 0) return;
+            let ts = ta.selectionStart;
+            ta.value = ta.value.slice(0,ta.selectionStart-1) + ta.value.slice(ta.selectionStart);
+            ta.selectionStart = ts-1;
+            ta.selectionEnd = ts-1;
+        }
+    }
+    function del(ev){
+        if(ev.code === 'Delete'){
+            let ta = document.querySelector('textarea');
+            if(ta.selectionStart == ta.value.length) return;
+            let ts = ta.selectionStart;
+            ta.value = ta.value.slice(0,ta.selectionStart) + ta.value.slice(ta.selectionStart+1);
+            ta.selectionStart = ts;
+            ta.selectionEnd = ts;
+        }
+    }
+    function siftCaps(isShift){
+        if(isShift == false && caps == false ){
+            [...document.querySelectorAll('.btn')].forEach(btn => { 
+                let btnFromMap = btnValues.get(btn.dataset.code);
+                if (btnFromMap.name === undefined) btn.innerHTML = eng ? btnFromMap.val : btnFromMap.belVal;
+            })
+            
+        } else if (isShift == true && caps == false){
+            [...document.querySelectorAll('.btn')].forEach(btn => { 
+                let btnFromMap = btnValues.get(btn.dataset.code);
+                if (btnFromMap.name === undefined) btn.innerHTML = eng ? btnFromMap.shiftVal : btnFromMap.belShiftVal;
+            })
+        } else if (isShift == false && caps == true){
+            eng ?
+            [...document.querySelectorAll('.btn')].forEach(btn => { 
+                let btnFromMap = btnValues.get(btn.dataset.code);
+                if (btnFromMap.isLetter !== undefined){
+                    btn.innerHTML = btnFromMap.shiftVal;
+                } else if (btnFromMap.name === undefined && btnFromMap.isLetter === undefined){
+                    btn.innerHTML = btnFromMap.val;
+                }
+            }) :
+            [...document.querySelectorAll('.btn')].forEach(btn => { 
+                let btnFromMap = btnValues.get(btn.dataset.code);
+                if (btnFromMap.isLetter !== undefined){
+                    btn.innerHTML = btnFromMap.belShiftVal;
+                } else if (btnFromMap.name === undefined && btnFromMap.isBelLetter === undefined){
+                    btn.innerHTML = btnFromMap.belVal;
+                }
+            })
+        } else if (isShift == true && caps == true){
+            eng ?
+            [...document.querySelectorAll('.btn')].forEach(btn => { 
+                let btnFromMap = btnValues.get(btn.dataset.code);
+                if (btnFromMap.isLetter !== undefined){
+                    btn.innerHTML = btnFromMap.val;
+                } else if (btnFromMap.name === undefined && btnFromMap.isLetter === undefined){
+                    btn.innerHTML = btnFromMap.shiftVal;
+                }
+            }) :
+            [...document.querySelectorAll('.btn')].forEach(btn => { 
+                let btnFromMap = btnValues.get(btn.dataset.code);
+                if (btnFromMap.isLetter !== undefined){
+                    btn.innerHTML = btnFromMap.belVal;
+                } else if (btnFromMap.name === undefined && btnFromMap.isBelLetter === undefined){
+                    btn.innerHTML = btnFromMap.belShiftVal;
+                }
+            })
+        } 
         
+    }
+        });
+
     </script>
 </body>
 </html>
