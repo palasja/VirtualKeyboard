@@ -125,9 +125,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const textArea = document.createElement("textarea");
   textArea.id = "textarea";
-  document.querySelector("body").append(textArea);
-  document.querySelector("body").append(keyboard);
-
+  const header = document.createElement("h1");
+  header.innerHTML = "RSS Virtual Keyboard";
+  const comentKeyboard = document.createElement("p");
+  comentKeyboard.innerHTML = "Keyboard was created on Windows OS";
+  const comentLang = document.createElement("p");
+  comentLang.innerHTML = "For change language use ctrl + alt";
+  const body = document.querySelector("body");
+  body.append(header);
+  body.append(textArea);
+  body.append(keyboard);
+  body.append(comentKeyboard);
+  body.append(comentLang);
   document.addEventListener("keydown", keyboardPress);
   document.addEventListener("keydown", keyboardFunction);
   document.addEventListener("keydown", changeLang);
@@ -149,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.innerHTML = btnProp.belVal;
       }
     } else {
+      btn.classList.add("btnFunk");
       btn.innerHTML = btnProp.name;
     }
     return btn;
