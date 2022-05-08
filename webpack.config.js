@@ -25,6 +25,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Virtual Keyboard',
     }),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        '!.git',
+      ],
+    }),
   ],
 };
