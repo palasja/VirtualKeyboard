@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       code = ev.target.dataset.code;
     }
     const btn = document.querySelector(`[data-code=${code}]`);
-    if (btn !== undefined && code !== 'CapsLock') {
+    if (btn !== null && btn !== undefined && code !== 'CapsLock') {
       lastPress = btn;
       btn.classList.add('press');
       if (btnValues.get(code) instanceof KeyButton) printChar(btn.innerHTML);
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function keyboardUp(ev) {
     if (ev.type === 'keyup') {
       const btn = document.querySelector(`[data-code=${ev.code}]`);
-      if (btn !== undefined && ev.code !== 'CapsLock') {
+      if (btn !== null && btn !== undefined && ev.code !== 'CapsLock') {
         btn.classList.remove('press');
       }
       if (ev.code === 'ShiftRight' || ev.code === 'ShiftLeft') siftCaps(false);
