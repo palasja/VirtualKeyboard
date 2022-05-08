@@ -105,7 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function keyboardPress(ev) {
     ev.preventDefault();
-    const code = ev.type === 'keydown' ? ev.code : ev.target.dataset.code;
+    let code = null;
+    if (ev.type === 'keydown') {
+      code = ev.code;
+    } else {
+      if (ev.target.dataset.code === undefined) {
+        return;
+      }
+      code = ev.target.dataset.code;
+    }
     const btn = document.querySelector(`[data-code=${code}]`);
     if (btn !== undefined && code !== 'CapsLock') {
       lastPress = btn;
