@@ -24,6 +24,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Virtual Keyboard',
+      template: './index.html',
     }),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
