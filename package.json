@@ -1,0 +1,46 @@
+{
+  "name": "virtual-keyboard",
+  "version": "1.0.0",
+  "description": "RSS Virtual Keyboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development --watch ",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/palasja/VirtualKeyboard.git"
+  },
+  "keywords": [
+    "js",
+    "keyboard"
+  ],
+  "author": "palasja@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/palasja/VirtualKeyboard/issues"
+  },
+  "homepage": "https://github.com/palasja/VirtualKeyboard#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "lf",
+    "bracketSameLine": true
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack-dev-server": "^4.9.0"
+  }
+}
