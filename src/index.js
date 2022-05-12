@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         [...document.querySelectorAll('.btn')].forEach((button) => {
           const btn = button;
           const btnFromMap = btnValues.get(btn.dataset.code);
-          if (btnFromMap.isLetter) {
+          if (btnFromMap.isBelLetter) {
             btn.innerHTML = btnFromMap.belVal;
           } else if (
             btnFromMap instanceof KeyButton
@@ -245,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ta.selectionEnd = ts;
         break;
       case 'CapsLock':
+        if(ev.repeat === true) break;
         caps = !caps;
         if (caps) {
           document.querySelector('[data-code=CapsLock]').classList.add('press');
